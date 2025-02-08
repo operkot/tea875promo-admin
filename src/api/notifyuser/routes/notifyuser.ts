@@ -3,7 +3,7 @@ export default {
     {
      method: 'POST',
      path: '/notifyuser',
-     handler: 'notifyuser.create',
+     handler: 'notifyuser.sendmessage',
      config: {
        policies: [],
        middlewares: [],

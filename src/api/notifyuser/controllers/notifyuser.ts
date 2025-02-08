@@ -3,32 +3,24 @@
  */
 
 export default {
-  async create(ctx) {
-    console.log(ctx.request.body);
-    
-
+  async sendmessage(ctx) {
     if (ctx.request.body?.model === "request") {
       const { chat_id, comment, request_status } = ctx.request.body?.entry
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      
-      const rawData = JSON.stringify({
-        chat_id,
-        comment,
-        request_status
-      });
-      
+    
+      if (request_status === 'pending') return
+
+      const url = `https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}/sendMessage`;
+      const rejectedMessage = comment ? `❌ Ваша заявка отклонена. Причина: ${comment}` : '❌ Ваша заявка отклонена'
+      const message = request_status === 'approved' ? '🎉 Ваша заявка одобрена! Желаем удачи!' : rejectedMessage
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json");
+
       try {
-        await fetch(`${process.env.TG_BOT_URL}/notifyuser`, { method: 'POST', headers: myHeaders, body: rawData })
-        return ctx.send({ message: "Message sent successfully!" });
+        await fetch(url, { method: 'POST', headers, body: JSON.stringify({ chat_id, text: message }) })
+        console.log('Message sent to Telegram');
       } catch (error) {
-        return ctx.send({ message: "Error while sending message!" });
+        console.error('Error sending message to Telegram:', error);
       }
     }
-    
-
-
-
-
   },
 };
