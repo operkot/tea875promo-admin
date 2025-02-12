@@ -1,5 +1,0 @@
-/**
- * notifyuser service
- */
-
-export default () => ({});

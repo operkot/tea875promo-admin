@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "blocks",
-      "required": true
-    },
     "requests": {
       "type": "relation",
       "relation": "oneToMany",
@@ -32,11 +28,16 @@
       "required": true
     },
     "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
     }
   }
 }

@@ -1,12 +1,10 @@
-/**
- * A set of functions called "actions" for `notifyuser`
- */
-
 export default {
-  async sendmessage(ctx) {
-    if (ctx.request.body?.model === "request") {
-      const { chat_id, comment, request_status } = ctx.request.body?.entry
-    
+  afterUpdate: async (event) => {
+
+    if (event.model.singularName === 'request') {
+      const { result, previous } = event;
+      const { chat_id, comment, request_status } = result
+  
       if (request_status === 'pending') return
 
       const url = `https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}/sendMessage`;
@@ -21,6 +19,7 @@ export default {
       } catch (error) {
         console.error('Error sending message to Telegram:', error);
       }
-    }
-  },
-};
+
+    }    
+  }
+}
