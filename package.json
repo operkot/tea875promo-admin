@@ -11,9 +11,9 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.8.1",
-    "@strapi/plugin-users-permissions": "5.8.1",
-    "@strapi/strapi": "5.8.1",
+    "@strapi/plugin-cloud": "5.11.3",
+    "@strapi/plugin-users-permissions": "5.11.3",
+    "@strapi/strapi": "5.11.3",
     "better-sqlite3": "11.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -32,5 +32,8 @@
   },
   "strapi": {
     "uuid": "021674ee-5f72-47e4-9ebb-7b37e0223106"
-  }
+  },
+  "workspaces": [
+    "./src/plugins/export-plugin"
+  ]
 }
